@@ -1,0 +1,59 @@
+<odoo>
+    <!-- Form View -->
+    <record id="view_gym_form" model="ir.ui.view">
+        <field name="name">gym.gym.form</field>
+        <field name="model">gym.gym</field>
+        <field name="arch" type="xml">
+            <form string="Gym">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="location"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Tree View -->
+    <record id="view_gym_tree" model="ir.ui.view">
+        <field name="name">gym.gym.tree</field>
+        <field name="model">gym.gym</field>
+        <field name="arch" type="xml">
+            <tree string="Gyms">
+                <field name="name"/>
+                <field name="location"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Kanban View -->
+    <record id="view_gym_gym_kanban" model="ir.ui.view">
+        <field name="name">gym.gym.kanban</field>
+        <field name="model">gym.gym</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <field name="name"/>
+                <field name="location"/>
+
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_card">
+                            <div><strong><t t-esc="record.name.value"/></strong></div>
+                            <div><t t-esc="record.location.value"/></div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="action_gym" model="ir.actions.act_window">
+        <field name="name">Gyms</field>
+        <field name="res_model">gym.gym</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="menu_gym_root" name="Gym"/>
+    <menuitem id="menu_gym_gym" name="Gyms" parent="menu_gym_root" action="action_gym"/>
+</odoo>
