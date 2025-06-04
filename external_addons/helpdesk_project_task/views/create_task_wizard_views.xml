@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <record id="view_create_task_wizard_form" model="ir.ui.view">
+    <field name="name">helpdesk.create.task.wizard.form</field>
+    <field name="model">helpdesk.create.task.wizard</field>
+    <field name="arch" type="xml">
+      <form string="Create Project Task">
+        <sheet>
+          <group>
+            <field name="helpdesk_ticket_id" invisible="1"/>
+            <field name="name"/>
+            <field name="description"/>
+            <field name="partner_id"/>
+            <field name="project_id"/>
+            <field name="stage_id"/>
+            <field name="user_ids" widget="many2many_tags"/>
+            <field name="tag_ids" widget="many2many_tags"/>
+          </group>
+        </sheet>
+        <footer>
+          <button name="action_create_task" string="Create Task" type="object" class="btn-primary"/>
+          <button string="Cancel" class="btn-secondary" special="cancel"/>
+        </footer>
+      </form>
+    </field>
+  </record>
+
+  <record id="action_create_task_wizard" model="ir.actions.act_window">
+    <field name="name">Create Project Task</field>
+    <field name="res_model">helpdesk.create.task.wizard</field>
+    <field name="view_mode">form</field>
+    <field name="target">new</field>
+  </record>
+</odoo>
