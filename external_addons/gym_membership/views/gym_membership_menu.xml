@@ -1,0 +1,15 @@
+<odoo>
+    <!-- Main menu -->
+    <menuitem
+        id="gym_menu_root"
+        name="Gym membership"
+        sequence="10"/>
+
+    <!-- Submenu for memberships -->
+    <menuitem
+        id="gym_menu_membership"
+        name="Memberships"
+        parent="gym_menu_root"
+        action="action_gym_membership"
+        sequence="10"/>
+</odoo>

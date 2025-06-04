@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id,perm_read,perm_write,perm_create,perm_unlink
+access_crm_lead_inventory_line_user,access.crm.lead.inventory.line.user,model_crm_lead_inventory_line,,1,1,1,1
+access_crm_product_package_user,access.crm.product.package.user,model_crm_product_package,,1,1,1,1
+access_crm_product_package_line_user,access.crm.product.package.line.user,model_crm_product_package_line,,1,1,1,1
+access_crm_lead_add_package_wizard_user,access.crm.lead.add.package.wizard.user,model_crm_lead_add_package_wizard,,1,1,1,1
+access_crm_lead_add_package_wizard_line_user,access.crm.lead.add.package.wizard.line.user,model_crm_lead_add_package_wizard_line,,1,1,1,1
