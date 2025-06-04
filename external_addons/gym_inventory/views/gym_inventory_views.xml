@@ -1,0 +1,114 @@
+<odoo>
+    <!-- Form view -->
+    <record id="view_gym_inventory_form" model="ir.ui.view">
+        <field name="name">gym.inventory.form</field>
+        <field name="model">gym.inventory</field>
+        <field name="arch" type="xml">
+            <form string="Gym inventory">
+                <sheet>
+                    <group string="General Info">
+                        <field name="name"/>
+                        <field name="brand"/>
+                        <field name="safe_level"/>
+                        <field name="description"/>
+                    </group>
+                    <group string="Weight">
+                        <field name="weight_kg"/>
+                        <field name="weight_ton"/>
+                    </group>
+                    <group string="Additional Info">
+                        <field name="category_id"/>
+                        <field name="gym_id"/>
+                        <field name="article"/>
+                    </group>
+                    <group string="Photo">
+                        <field name="image" widget="image" class="oe_avatar"/>
+                    </group>
+                </sheet>
+
+                <!-- Chatter -->
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- Tree View -->
+    <record id="view_gym_inventory_tree" model="ir.ui.view">
+        <field name="name">gym.inventory.tree</field>
+        <field name="model">gym.inventory</field>
+        <field name="arch" type="xml">
+            <tree string="Inventories">
+                <field name="name"/>
+                <field name="brand"/>
+                <field name="safe_level"/>
+                <field name="weight_kg"/>
+                <field name="weight_ton"/>
+                <field name="gym_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Kanban View -->
+    <record id="view_gym_inventory_kanban" model="ir.ui.view">
+        <field name="name">gym.inventory.kanban</field>
+        <field name="model">gym.inventory</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <field name="name"/>
+                <field name="brand"/>
+                <field name="gym_id"/>
+                <field name="weight_kg"/>
+                <field name="weight_ton"/>
+                <field name="category_id"/>
+                <field name="safe_level"/>
+                <field name="article"/>
+                <field name="image"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_card oe_kanban_global_click">
+                              <!-- Main container: flex -->
+                              <div style="display: flex; gap: 16px; align-items: flex-start;">
+
+                                <!-- Photo -->
+                                <div>
+                                  <img class="o_kanban_image_inner_pic"
+                                       t-att-src="kanban_image('gym.inventory', 'image', record.id.raw_value)"
+                                       style="max-height: 150px; max-width: 120px; border-radius: 8px;"
+                                       alt="image"/>
+                                </div>
+
+                                <!-- Name + Info -->
+                                <div>
+                                  <div style="font-size: 18px; font-weight: bold; margin-bottom: 8px;">
+                                    <t t-esc="record.name.value"/>
+                                  </div>
+
+                                  <div>
+                                    <span><b>Brand:</b> <t t-esc="record.brand.value"/></span><br/>
+                                    <span><b>Weight:</b> <t t-esc="record.weight_kg.value"/> kg | <t t-esc="record.weight_ton.value"/> ton</span><br/>
+                                    <span><b>Safety:</b> <t t-esc="record.safe_level.value"/></span><br/>
+                                    <span><b>Gym:</b> <t t-esc="record.gym_id.value"/></span><br/>
+                                    <span><b>Article:</b> <t t-esc="record.article.value"/></span>
+                                  </div>
+                                </div>
+
+                              </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_gym_inventory" model="ir.actions.act_window">
+        <field name="name">Gym Inventory</field>
+        <field name="res_model">gym.inventory</field>
+        <field name="view_mode">tree,form,kanban</field>
+    </record>
+
+</odoo>
