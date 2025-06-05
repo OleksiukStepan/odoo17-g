@@ -1,0 +1,13 @@
+<odoo>
+    <!-- Main menu -->
+    <menuitem
+        id="gym_inventory_menu_root"
+        name="Gym Inventory"/>
+
+    <!-- Submenu for inventory -->
+    <menuitem
+        id="gym_inventory_menu_items"
+        name="Items"
+        parent="gym_inventory_menu_root"
+        action="action_gym_inventory"/>
+</odoo>
