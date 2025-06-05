@@ -34,7 +34,6 @@ class CrmProductPackageLine(models.Model):
     package_id = fields.Many2one(
         "crm.product.package",
         string="Package",
-        required=True,
         ondelete="set null",
         tracking=True,
     )
