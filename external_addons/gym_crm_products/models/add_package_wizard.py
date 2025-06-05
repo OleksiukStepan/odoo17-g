@@ -61,6 +61,16 @@ class CrmLeadAddPackageWizard(models.TransientModel):
             new_tags = list(set(lead_tags) | set(package_tags))
             self.lead_id.write({"tag_ids": [(6, 0, new_tags)]})
 
+        return {
+            "type": "ir.actions.client",
+            "tag": "display_notification",
+            "params": {
+                "title": "Success",
+                "message": "Package added to lead",
+                "sticky": False,
+            },
+        }
+
 
 class CrmLeadAddPackageWizardLine(models.TransientModel):
     _name = "crm.lead.add.package.wizard.line"
