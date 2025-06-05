@@ -1,4 +1,4 @@
-from odoo import models, fields, api
+from odoo import models, fields, api, Command
 
 
 class CrmLeadAddPackageWizard(models.TransientModel):
@@ -29,19 +29,14 @@ class CrmLeadAddPackageWizard(models.TransientModel):
     @api.onchange("package_id")
     def _onchange_package_id(self):
         if self.package_id:
-            lines = []
-            for pkg_line in self.package_id.package_line_ids:
-                lines.append(
-                    (
-                        0,
-                        0,
-                        {
-                            "inventory_id": pkg_line.inventory_id.id,
-                            "quantity": pkg_line.quantity,
-                            "price_unit": pkg_line.price_unit,
-                        },
-                    )
-                )
+            lines = [
+                Command.create({
+                    "inventory_id": pkg_line.inventory_id.id,
+                    "quantity": pkg_line.quantity,
+                    "price_unit": pkg_line.price_unit,
+                })
+                for pkg_line in self.package_id.package_line_ids
+            ]
             self.line_ids = lines
 
     def action_add_to_lead(self):
