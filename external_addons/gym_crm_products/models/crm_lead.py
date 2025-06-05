@@ -1,4 +1,4 @@
-from odoo import api, fields, models
+from odoo import api, fields, models, _
 
 
 class CrmLead(models.Model):
@@ -38,16 +38,19 @@ class CrmLead(models.Model):
             message = ""
             for line in lead.inventory_line_ids:
                 pkg = line.package_id
-                if pkg and pkg.expiration_date and pkg.expiration_date < today:
-                    expired_present = True
-                    if not lead.stage_id.is_won:
-                        message = (
-                            "Attention! Some products have been added from "
-                            "a package that has expired."
-                        )
-                        break
-                    else:
-                        message = ""
-                        break
+                if (
+                    not pkg
+                    or not pkg.expiration_date
+                    or pkg.expiration_date >= today
+                ):
+                    continue
+                expired_present = True
+                if not lead.stage_id.is_won:
+                    message = _(
+                        "Attention! Some products have been added "
+                        "from a package that has expired!"
+                    )
+                break
+
             lead.has_expired_package = expired_present
             lead.expired_package_message = message
